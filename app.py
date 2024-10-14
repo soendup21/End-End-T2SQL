@@ -41,12 +41,18 @@ Special Handling: If the user asks about "good," use the Good column in countrec
 ]
 
 # Creating connection object
+import mysql.connector
+
+import mysql.connector
+
 mydb = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "SONYpassword",
-    database = "SonyDatabaseTest"
+    host="localhost",        # Docker exposes MySQL on localhost
+    user="root",             # MySQL root user
+    password="my-secret-pw",  # Your MySQL root password
+    database="MYSQL_DATABASE" # The database that was created
 )
+
+
 
 def get_gemini_response(question, admin_prompt):
     try:

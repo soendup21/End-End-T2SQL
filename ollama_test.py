@@ -9,7 +9,6 @@ mydb = mysql.connector.connect(
     database="SonyDatabaseTest"
 )
 
-# Ollama API setup
 ollama_url = "http://localhost:11434/api/generate"
 
 def get_ollama_response(question, admin_prompt):
@@ -17,7 +16,7 @@ def get_ollama_response(question, admin_prompt):
         prompt = admin_prompt[0] + "\n" + question
         data = {
             "model": "tinyllama",
-            "prompt": prompt,  # Corrected assignment here
+            "prompt": prompt, 
             "stream": False
         }
         headers = {
