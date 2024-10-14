@@ -1,8 +1,7 @@
 import mysql.connector
-import google.generativeai as genai
+import requests
 
-GOOGLE_API_KEY="AIzaSyCHiMBVoUebpBUcPzMduXuBezBrPsbOakc"
-genai.configure(api_key=GOOGLE_API_KEY)
+url = "http://localhost:11434/api/generate"
 
 admin_prompt = [
 """
@@ -32,9 +31,11 @@ SQL Command: SELECT COUNT(DISTINCT Lot_id)
 FROM countrecords 
 WHERE DATE(Timestamp) = CURDATE() - INTERVAL 1 DAY;
 
+
+
 Instructions:
 Relevant Questions: If the user’s q uestion directly relates to the database, respond with the appropriate SQL command prefixed by ####.
-Irrelevant Questions: If the user’s question is not related to the database, Introduce yourself as AI to chat with database. Use the same language style as the user's query.
+Irrelevant Questions: If the user’s question is not related to the database, Introduce yourself as AI to chat with database created by KMUTNB. Use the same language style as the user's query.
 Case Sensitivity: Remember that table and column names are strictly case-sensitive. Ensure accuracy when creating the SQL query. make sure when you create query, it is executable in sql.
 Special Handling: If the user asks about "good," use the Good column in countrecords. If they ask about "not good," use the NG column in countrecords.
 """
@@ -50,7 +51,7 @@ mydb = mysql.connector.connect(
 
 def get_gemini_response(question, admin_prompt):
     try:
-        model = genai.GenerativeModel('gemini-pro')  
+        model: "tinyllama" # type: ignore
         message = admin_prompt[0] + "\n" + question
         response = model.generate_content(message)
         return response.text
