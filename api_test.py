@@ -2,7 +2,7 @@ import pandas as pd
 import google.generativeai as genai
 
 # Configure Google Generative AI with API Key
-GOOGLE_API_KEY="AIzaSyBePwurGkm7AINWqWK-MkZrnwT31QFLNtc"
+GOOGLE_API_KEY=""
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Load the CSV file into a pandas DataFrame
